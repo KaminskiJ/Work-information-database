@@ -1,0 +1,16 @@
+{% extends 'knowledgebank/base.html' %}
+{% block content %}
+
+    <div>
+    <a href="{% url 'create-question' %}">Add question</a>
+    </div>
+    <br>
+
+    {% for question in questions %}
+        <div class="question" >
+        <small class="text-muted">{{ question.creation_date|date:"F d, Y" }}</small>
+        <small class="text-muted">by {{ question.author }}</small>
+        <p class="article-content">{{ question.content }}</p>
+        </div><br>
+    {% endfor %}
+{% endblock content %}

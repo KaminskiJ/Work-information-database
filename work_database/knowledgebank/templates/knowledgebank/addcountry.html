@@ -1,0 +1,11 @@
+{% extends "knowledgebank/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h3>Add new Country:</h3>
+    <form method="POST" class="country-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-default">Add</button>
+    </form>
+
+{% endblock %}

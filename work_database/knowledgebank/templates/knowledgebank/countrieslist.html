@@ -1,0 +1,13 @@
+{% extends "knowledgebank/base.html" %}
+{% block content %}
+    <p>Please select a country that you're interested in:</p>
+
+    {% for country in countries %}
+    <a href='/countries/{{ country.pk }}'>
+        <div class="question" >
+        {{ country.country }}
+        </div><br>
+    </a>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "knowledgebank/base.html" %}
+{% block content %}
+
+    <p>Details for client: <b>{{ client_name }}</b></p>
+
+    {% if client_entries %}
+
+        {% for entry in client_entries %}
+
+        <div>
+            {{ entry.content }}<br>
+            <small class="text-muted">by {{ entry.author }}</small>
+        </div><br>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p><b>No entry for this country yet!</b></p>
+
+    {% endif %}
+
+{% endblock %}

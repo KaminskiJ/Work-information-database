@@ -1,0 +1,17 @@
+{% extends 'knowledgebank/base.html' %}
+{% block content %}
+   {% for question in questions %}
+       <article class="media content-section">
+           <div class="media-body">
+               <div class="article-metadata">
+                        <a href="{% url 'twitter:tweet-detail' question.pk %}">
+                       <small class="text-muted">{{ question.creation_date|date:"F d, Y" }}</small></a>
+                        <a href="{% url 'twitter:author-detail' question.author.pk %}">
+                        <small class="text-muted">by {{ question.author }}</small></a>
+
+               </div>
+               <p class="article-content">{{ question.content }}</p>
+           </div>
+       </article>
+   {% endfor %}
+{% endblock content %}

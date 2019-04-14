@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Mercer GBM knowledge database</title>
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="{% static 'knowledgebank/style.css' %}">
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    </head>
+    <body>
+
+
+
+        <div class="wrapper">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <a href="{% url 'home' %}"><h3>Client and countries knowledge database</h3></a>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Database</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li><a href="{% url 'countries' %}">Countries data</a></li>
+                            <li><a href="{% url 'clients' %}">Client data</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'discussion' %}">Discussions</a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li><a href="mailto:jakub.kamin2@gmail.com">Contact administrator</a></li>
+                </ul>
+            </nav>
+
+            <div id="content">
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span>Toggle Sidebar</span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                {% if user.is_authenticated %}
+                                    <li><a href="{% url 'new-country' %}">Add country </a></li>
+                                    <li><a href="{% url 'new-client' %}">Add client</a></li>
+                                    <li><a href="{% url 'new-country-info' %}">Add country information</a></li>
+                                    <li><a href="{% url 'new-client-info' %}">Add client information</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                {% if user.is_authenticated %}
+                    <h2>Hello {{user}}! Welcome to Mercer GBM knowledge database</h2>
+                {% else %}
+                    <h2>Hello! Welcome to Mercer GBM knowledge database</h2>
+                    <p>Please <a href="{% url 'login' %}"><u>login</a></u> to see additional options</p>
+                {% endif %}
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+
+
+
+
+
+        <!-- jQuery CDN -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'knowledgebank/base.html' %}
+{% block content %}
+<h2>Questions by {{ questions.author }}</h2>
+   {% for question in questions %}
+       <article class="media content-section">
+           <div class="media-body">
+               <div class="article-metadata">
+                   <small class="text-muted">{{ question.creation_date|date:"F d, Y" }}</small>
+                   <small class="text-muted">by {{ question.author }}</small>
+               </div>
+               <p class="article-content">{{ question.content }}</p>
+           </div>
+       </article>
+   {% endfor %}
+{% endblock content %}

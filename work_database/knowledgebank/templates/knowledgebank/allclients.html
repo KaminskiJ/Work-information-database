@@ -1,0 +1,14 @@
+{% extends "knowledgebank/base.html" %}
+{% block content %}
+    <p>All cients data:</p>
+
+    {% for client in clients %}
+        <div class="question" >
+            Client: {{ client }}<br><br>
+            Information: {{ client.content }}<br><br>
+            <small class="text-muted">Entry author: {{ client.author }}</small><br>
+            <small class="text-muted">Date added: {{ client.creation_date }}</small><br>
+        </div><br>
+    {% endfor %}
+
+{% endblock %}
