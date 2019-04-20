@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.template.response import TemplateResponse
-from .forms import QuestionForm, NewClient, NewCountry
-from .models import CountriesData, ClientData, Question, Client, Country
+from .forms import QuestionForm, NewClient, NewCountry, ReplyForm
+from .models import CountriesData, ClientData, Question, Client, Country, Comment
 from knowledgebank import models
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -101,14 +101,14 @@ class CountryDetails(View):
         return render(request, 'knowledgebank/countryview.html', {'country_entries': country_entries, 'country_name': country_name})
 
 
-class QuestionsList(View):
+class PostList(View):
 
     def get(self, request):
         questions = Question.objects.all().order_by('-creation_date')
         return render(request, 'knowledgebank/questions.html', {'questions': questions})
 
 
-class CreateQuestion(LoginRequiredMixin, CreateView):
+class CreatePost(LoginRequiredMixin, CreateView):
     model = models.Question
     form_class = QuestionForm
     success_url = reverse_lazy('discussion')
@@ -118,6 +118,41 @@ class CreateQuestion(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class PostDetailView(View):
+
+    def get(self, request, post_id):
+        form = ReplyForm()
+        post = Question.objects.get(pk=post_id)
+        comments = Comment.objects.filter(question=post_id).order_by('-date_comment')
+        return render(request, 'knowledgebank/postdetailsview.html', {'post': post, 'form': form, 'comments': comments})
+
+    def post(self, request, post_id):
+        form = ReplyForm(request.POST)
+        post = Question.objects.get(pk=post_id)
+        comments = Comment.objects.filter(question=post_id).order_by('-date_comment')
+
+        if form.is_valid():
+            content = form.cleaned_data.get('content')
+            author = self.request.user
+            new_entry = Comment(author=author, question=Question.objects.get(pk=post_id), content=content)
+            new_entry.save()
+            return render(request, 'knowledgebank/postdetailsview.html', {'post': post, 'form': form, 'comments': comments})
+
+        return render(request, 'knowledgebank/postdetailsview.html', {'post': post, 'form': form, 'comments': comments})
+
+
+
+
+
+
+
+
+
+
+
+
+
+#to be added
 class AuthorDetailView(View):
 
     def get(self, request, pk):

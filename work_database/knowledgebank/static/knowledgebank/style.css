@@ -45,6 +45,19 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
+.button {
+  text-decoration: none;
+  background-color: #35c2ee;
+  color: #333333;
+  padding: 4px 12px 4px 12px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  border-radius: 8px;
+}
+
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */

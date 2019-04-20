@@ -10,7 +10,8 @@
         <div class="question" >
         <small class="text-muted">{{ question.creation_date|date:"F d, Y" }}</small>
         <small class="text-muted">by {{ question.author }}</small>
-        <p class="article-content">{{ question.content }}</p>
-        </div><br>
+        <a href="post/{{ question.pk }}"><p class="article-content">{{ question.content }}</a></p>
+        </div>
+        <div class="line"></div>
     {% endfor %}
 {% endblock content %}

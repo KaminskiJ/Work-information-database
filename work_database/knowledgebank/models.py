@@ -47,8 +47,7 @@ class Question(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'[{self.creation_date}] ' \
-               f'Comment by {self.author}: {self.content[:80]}'
+        return self.content
 
 
 class Comment(models.Model):

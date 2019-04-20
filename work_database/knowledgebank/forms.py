@@ -17,3 +17,7 @@ class QuestionForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea()
         }
+
+
+class ReplyForm(forms.Form):
+    content = forms.CharField(widget=forms.Textarea, label='')

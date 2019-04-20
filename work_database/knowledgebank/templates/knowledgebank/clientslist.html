@@ -1,6 +1,6 @@
 {% extends "knowledgebank/base.html" %}
 {% block content %}
-    <p>Please select a client that you're interested in:</p>
+    <p>Please select a client that you're interested in:</p><br>
 
     {% for client in clients %}
         <a href='/clients/{{ client.pk }}'>

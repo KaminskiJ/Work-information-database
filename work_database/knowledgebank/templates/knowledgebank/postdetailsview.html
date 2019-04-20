@@ -1,0 +1,33 @@
+{% extends 'knowledgebank/base.html' %}
+
+{% block content %}
+
+    <br><p>Details for post number {{post.pk}} created by: {{post.author}}</p>
+    <div class="line"></div>
+    {{post.content}}
+    <div class="line"></div>
+
+    TESCIK {{x}}
+
+    {% for comment in comments %}
+        <div class="question">
+        <small class="text-muted">{{ comment.date_comment|date:"F d, Y" }}</small>
+        <small class="text-muted">by {{ comment.author }}</small>
+        <p class="article-content">{{ comment.content }}</p>
+        </div>
+        <div class="line"></div>
+    {% endfor %}
+
+    <div style="text-align:center;" id="box">
+    <div href="#ResponseForm" class="btn btn-info navbar-btn" data-toggle="collapse">Be the first person to add a reply!</div>
+    </div>
+
+<div id="ResponseForm" class="collapse">
+    <form method="POST">
+        {% csrf_token %}
+        <br>{{form}}<br>
+        <button type="submit" class="btn btn-default">Add reply</button>
+    </form>
+</div>
+
+{% endblock content %}

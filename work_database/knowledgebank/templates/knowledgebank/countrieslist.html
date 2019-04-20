@@ -1,6 +1,6 @@
 {% extends "knowledgebank/base.html" %}
 {% block content %}
-    <p>Please select a country that you're interested in:</p>
+    <p>Please select a country that you're interested in:</p><br>
 
     {% for country in countries %}
     <a href='/countries/{{ country.pk }}'>

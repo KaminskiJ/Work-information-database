@@ -1,7 +1,7 @@
 {% extends "knowledgebank/base.html" %}
 {% block content %}
 
-    <p>Details for client: <b>{{ client_name }}</b></p>
+    <p>Details for client: <b>{{ client_name }}</b></p><br>
 
     {% if client_entries %}
 
@@ -10,7 +10,8 @@
         <div>
             {{ entry.content }}<br>
             <small class="text-muted">by {{ entry.author }}</small>
-        </div><br>
+        </div>
+         <div class="line"></div>
 
         {% endfor %}
 
