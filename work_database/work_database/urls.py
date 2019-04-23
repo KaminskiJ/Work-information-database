@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from knowledgebank.views import Home, CountryEntryCreateView, ClientEntryCreateView, CountryDetails, ClientList, PostList, CreatePost, ClientDetails, CountriesList, AddNewClient, AddNewCountry, PostDetailView
+from knowledgebank.views import Home, CountryEntryCreateView, ClientEntryCreateView, CountryDetails, ClientList, PostList, CreatePost, ClientDetails, CountriesList, AddNewClient, AddNewCountry, PostDetailView, AuthorDetailView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('discussion/', PostList.as_view(), name='discussion'),
     path('createpost/', CreatePost.as_view(), name='create-question'),
     path('discussion/post/<int:post_id>', PostDetailView.as_view(), name='post-detail'),
+    path('user/<int:pk>', AuthorDetailView.as_view(), name='user-detail'),
     path('login/',
          auth_views.LoginView.as_view(template_name='knowledgebank/login.html'),
          name='login'),

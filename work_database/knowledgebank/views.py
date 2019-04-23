@@ -17,7 +17,7 @@ class Home(View):
         return render(request, 'knowledgebank/home.html')
 
 
-class AddNewCountry(View):
+class AddNewCountry(LoginRequiredMixin, View):
     def get(self, request):
         form = NewCountry()
         return render(request, 'knowledgebank/addcountry.html', {'form': form})
@@ -33,7 +33,7 @@ class AddNewCountry(View):
         return render(request, 'knowledgebank/addcountry.html', {'form': form})
 
 
-class AddNewClient(View):
+class AddNewClient(LoginRequiredMixin, View):
     def get(self, request):
         form = NewClient()
         return render(request, 'knowledgebank/addclient.html', {'form': form})
@@ -141,18 +141,6 @@ class PostDetailView(View):
         return render(request, 'knowledgebank/postdetailsview.html', {'post': post, 'form': form, 'comments': comments})
 
 
-
-
-
-
-
-
-
-
-
-
-
-#to be added
 class AuthorDetailView(View):
 
     def get(self, request, pk):

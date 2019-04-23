@@ -2,12 +2,9 @@
 
 {% block content %}
 
-    <br><p>Details for post number {{post.pk}} created by: {{post.author}}</p>
-    <div class="line"></div>
+    <br><p>Details for post number {{post.pk}} added by: {{post.author}} on {{post.creation_date|date:"F d, Y"}}</p>
     {{post.content}}
     <div class="line"></div>
-
-    TESCIK {{x}}
 
     {% for comment in comments %}
         <div class="question">
@@ -19,7 +16,15 @@
     {% endfor %}
 
     <div style="text-align:center;" id="box">
-    <div href="#ResponseForm" class="btn btn-info navbar-btn" data-toggle="collapse">Be the first person to add a reply!</div>
+    <div href="#ResponseForm" class="btn btn-info navbar-btn" data-toggle="collapse">
+
+        {% if comments %}
+            Add your comment!
+        {% else %}
+            Be the first person to add a reply!
+        {% endif %}
+
+        </div>
     </div>
 
 <div id="ResponseForm" class="collapse">
